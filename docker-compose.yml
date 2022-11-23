@@ -34,7 +34,6 @@ services:
       dockerfile: ./social_connect_app_frontend/Dockerfile
     volumes:
       - ./social_connect_app_frontend:/usr/src/app
-      - /usr/src/app/node_modules
     environment:
       NODE_ENV: development
     ports:

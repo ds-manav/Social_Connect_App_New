@@ -8,7 +8,6 @@ from sqlalchemy.orm import sessionmaker
 from django.contrib.auth import get_user_model
 
 engine =  create_engine("postgresql+psycopg2://postgres:postgre@db:5432/postgres")
-# engine =  create_engine("mysql+mysqldb://root:manavppp@localhost:3306/last")
 
 Base = declarative_base()
 class Users(Base):

@@ -22,20 +22,13 @@ comments =  db.Table('comments', metadata, autoload=True, autoload_with=engine)
 class UserViewSet(viewsets.ViewSet):
     # GET LIST OF ALL USER
     def list(self,request):
-        # q = Query([Users], session=session)
-        # users = q.all();
-        # user = session.query(Users).scalar();
-        
         query = db.select([users])
         ResultProxy = connection.execute(query)
         ResultSet = ResultProxy.fetchall()
-        # print(ResultSet);
-        # session.commit();
-        # print(user)
         return Response(ResultSet,status=status.HTTP_200_OK);
      
      
-    # AUTHENTICATE USER
+    # CREATE USER
     def create(self,request):
         session = Session()
         if(request.data.get("username")):
@@ -52,18 +45,7 @@ class UserViewSet(viewsets.ViewSet):
                 except:
                     return Response("Something went wrong,Please try again",status=status.HTTP_406_NOT_ACCEPTABLE);
                 return Response("Something went wrong,Please try again",status=status.HTTP_406_NOT_ACCEPTABLE);
-
-    # # CREATE USER
-    # def create(self,request):
-    #     data = request.data
-    #     query = db.insert(users).values(id=data['id'], username=data['username'], email=data['email'], password=data['password'])
-    #     try:
-    #         connection.execute(query);
-    #         return Response(data,status=status.HTTP_201_CREATED);
-    #     except:
-    #         return Response("Something went wrong",status=status.HTTP_406_NOT_ACCEPTABLE);
-    #     return Response(None,status=status.HTTP_208_ALREADY_REPORTED)
-        
+     
     # GET USER BY ID
     def retrieve(self,request,pk=None):
         user = session.query(Users).filter(Users.id==pk).one()
@@ -123,18 +105,14 @@ class UserViewSet(viewsets.ViewSet):
 class PostViewSet(viewsets.ViewSet):
     # GET LIST OF ALL USER
     def list(self,request):
-        # q = Query([Users], session=session)
-        # users = q.all();
-        # user = session.query(Users).scalar();
+       
         
         query = db.select([posts])
         ResultProxy = connection.execute(query)
         ResultSet = ResultProxy.fetchall()
-        # print(ResultSet);
-        # session.commit();
-        # print(user)
+        
         return Response(ResultSet,status=status.HTTP_200_OK);
-        # return Response(None);
+       
     # CREATE POSTS
     def create(self,request):
         data = request.data
@@ -149,7 +127,6 @@ class PostViewSet(viewsets.ViewSet):
         
     # GET POSTS BY ID
     def retrieve(self,request,pk=None):
-        # post = session.query(Posts).filter(Posts.id==pk).scalar()
         post = session.query(Posts).get(pk);
         print(post.feed)
         data ={"id":post.id,"username":post.username,"postid":post.userid,"feed":post.feed}
@@ -188,18 +165,11 @@ class PostViewSet(viewsets.ViewSet):
 class CommentViewSet(viewsets.ViewSet):
     # GET LIST OF ALL USER
     def list(self,request):
-        # q = Query([Users], session=session)
-        # users = q.all();
-        # user = session.query(Users).scalar();
         
         query = db.select([comments])
         ResultProxy = connection.execute(query)
         ResultSet = ResultProxy.fetchall()
-        # print(ResultSet);
-        # session.commit();
-        # print(user)
         return Response(ResultSet,status=status.HTTP_200_OK);
-        # return Response(None);
     # CREATE Comment
     def create(self,request):
         data = request.data;
@@ -223,7 +193,6 @@ class CommentViewSet(viewsets.ViewSet):
     # GET COMMENT BY ID
     def commentByForeignKey(self,request,pk=None):
         s = db.select([Comments]).where(Comments.postid==pk)
-        # comment = session.query(Comments).filter(Comments.postid==pk)
         resultProxy = connection.execute(s)
         result = resultProxy.fetchall()
         # print(result);

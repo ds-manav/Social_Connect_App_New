@@ -6,16 +6,17 @@ from django.urls import reverse
 
 
 class UserLoginTestCases(APITestCase):
+    id=18
     def setUp(self):
         self.client = APIClient()
-        engine =  create_engine("postgresql+psycopg2://postgres:manavppp@localhost:5432/test")
+        engine =  create_engine("postgresql+psycopg2://postgres:postgre@db:5432/test")
         Session = sessionmaker()
         Session.configure(bind=engine)
         session = Session()
         print("connected")
 
     def test_test_create_user(self):
-        data = {"id":17,"username":"manav","email":"manav1234566hghghhhbbbhhgh7fdf88@gmail.com","password":"manav"}
+        data = {"id":19,"username":"manav","email":"manavabgfgfc@gmail.com","password":"manav"}
         url = "http://127.0.0.1:8000/api/users/"
         self.client = APIClient()
         self.user = UserViewSet()
@@ -23,7 +24,7 @@ class UserLoginTestCases(APITestCase):
         self.assertEqual(response.status_code,201);
 
     def test_get_user_by_id(self):
-        url = "http://127.0.0.1:8000/api/users/10"
+        url = "http://127.0.0.1:8000/api/users/18"
         self.client = APIClient()
         self.user = UserViewSet()
         response = self.client.get(url)
@@ -31,7 +32,7 @@ class UserLoginTestCases(APITestCase):
         self.assertEqual(response.status_code,200);
     
     def test_login(self):
-        data = {"username":"manav","email":"manav@gmail.com","password":"manav"}
+        data = {"username":"manav","email":"manavabc@gmail.com","password":"manav"}
         url = "http://127.0.0.1:8000/api/login/"
         self.client = APIClient()
         self.user = UserViewSet()
@@ -42,14 +43,14 @@ class UserLoginTestCases(APITestCase):
 class PostsTestCases(APITestCase):
     def setUp(self):
         self.client = APIClient()
-        engine =  create_engine("postgresql+psycopg2://postgres:manavppp@localhost:5432/test")
+        engine =  create_engine("postgresql+psycopg2://postgres:postgre@db:5432/test")
         Session = sessionmaker()
         Session.configure(bind=engine)
         session = Session()
         print("connected")
 
     def test_create_posts(self):
-        data = {"id":17,"username":"manav","userid":10,"feed":"manavfeed"}
+        data = {"id":18,"username":"manav","userid":18,"feed":"manavfeed"}
         url = "http://127.0.0.1:8000/api/posts/"
         self.client = APIClient()
         self.user = PostViewSet()
@@ -57,7 +58,7 @@ class PostsTestCases(APITestCase):
         self.assertEqual(response.status_code,201);
 
     def test_get_post_by_id(self):
-        url = "http://127.0.0.1:8000/api/posts/15"
+        url = "http://127.0.0.1:8000/api/posts/18"
         self.client = APIClient()
         self.user = PostViewSet()
         response = self.client.get(url)
@@ -65,16 +66,17 @@ class PostsTestCases(APITestCase):
         self.assertEqual(response.status_code,200);
     
 class CommentsTestCases(APITestCase):
+    id = 15
     def setUp(self):
         self.client = APIClient()
-        engine =  create_engine("postgresql+psycopg2://postgres:manavppp@localhost:5432/test")
+        engine =  create_engine("postgresql+psycopg2://postgres:postgre@db:5432/test")
         Session = sessionmaker()
         Session.configure(bind=engine)
         session = Session()
         print("connected")
 
     def test_create_comments(self):
-        data = {"id":15,"username":"manav","postid":17,"comment":"manavfeed"}
+        data = {"id":16,"username":"manav","postid":17,"comment":"manavfeed"}
         url = "http://127.0.0.1:8000/api/comments/"
         self.client = APIClient()
         self.user = CommentViewSet()
@@ -82,7 +84,7 @@ class CommentsTestCases(APITestCase):
         self.assertEqual(response.status_code,201);
 
     def test_get_comment_by_id(self):
-        url = "http://127.0.0.1:8000/api/posts/15"
+        url = "http://127.0.0.1:8000/api/comments/16"
         self.client = APIClient()
         self.comment = CommentViewSet()
         response = self.client.get(url)
