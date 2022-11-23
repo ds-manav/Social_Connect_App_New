@@ -36,6 +36,7 @@ services:
       - ./social_connect_app_frontend:/usr/src/app
     environment:
       NODE_ENV: development
+    command: /usr/src/app/entrypoint.sh
     ports:
       - 3000:3000
     
