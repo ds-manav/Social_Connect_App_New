@@ -9,11 +9,12 @@ And then you just need to execute this comment in a docker client on top of dock
 Remember to install Docekr before running this file
 
 
-****IMP***
-PLEASE ACCEPT ALL THE CURRENT CHANGES IN SOCIAL_CONNECT_APP_FRONTEND TO RESOLVE ALL THE COMMIT
+DEVELOPEMENT COMMANDS:
+docker-compose -f docker-compose.yml up -d --build
 
-COMMANDS:
-docker-compose up -d --build
+TEST COMAMNDS
+docker-compose -f docker-compose.test.yml up -d --build
+
 
 This Command will execute your docker-compose and the Dockerfiles which in turn build the applications for you.
 
